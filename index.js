@@ -78,6 +78,20 @@ let spaceData = {
         ]
     }
 }
+app.use((req, res, next) => {
+console.log(req.method + ' ' + req.url)
+next()
+})
+
+app.get('/', (req, res) => {
+ res.send("<h1>Welcome to the Space API</h1>")
+})
+
+app.get('/earth', (req, res) => {
+    res.send(spaceData.planets[2])
+})
+
+
 
 
 // INSTRUCTIONS: Set up the code that does the following
@@ -89,9 +103,25 @@ let spaceData = {
 
 // ON YOUR OWN
 // - sends back the entire planets array when the client goes to /planets
+app.get('/planets', (req, res) => {
+    res.send()
+    
+})
 // - sends back the astronauts_in_space object when the client goes to /space
+app.get('/space', (req, res) => {
+    res.send(spaceData.astronauts_in_space)
+    
+})
 // - sends back the second planet when the client goes to /planets/2
+app.get('/planets/2', (req, res) => {
+    res.send(spaceData.planets[1])
+    
+})
 // - sends back the third planet when the client goes to /planets/3
+app.get('/planets/3', (req, res) => {
+    res.send(spaceData.planets[4])
+    
+})
 
 
 
@@ -99,4 +129,8 @@ let spaceData = {
 
 app.listen(3000, () => {
     console.log("Server running")
+})
+
+app.use((req, res, next) => {
+    res.status(404).send("404 NOT FOUND")
 })
